@@ -1,8 +1,8 @@
 import { drawField } from "../src/drawField";
 
 describe("drawField", () => {
-  let onCellClick;
-  let el;
+  let onCellClick: (x: number, y: number) => void;
+  let el: HTMLElement;
 
   beforeEach(() => {
     onCellClick = jest.fn();
@@ -41,11 +41,11 @@ describe("drawField", () => {
         [1, 1, 0],
       ];
       drawField(el, field, onCellClick);
-      const cell1 = el.querySelector('.cell[data-x="1"][data-y="2"]');
+      const cell1 = <HTMLElement>el.querySelector('.cell[data-x="1"][data-y="2"]');
       cell1.click();
       expect(onCellClick).toHaveBeenCalledWith(1, 2);
 
-      const cell2 = el.querySelector('.cell[data-x="2"][data-y="0"]');
+      const cell2 = <HTMLElement>el.querySelector('.cell[data-x="2"][data-y="0"]');
       cell2.click();
       expect(onCellClick).toHaveBeenCalledWith(2, 0);
     });
@@ -58,7 +58,7 @@ describe("drawField", () => {
       ];
       drawField(el, field, onCellClick);
       drawField(el, field, onCellClick);
-      const cell1 = el.querySelector('.cell[data-x="1"][data-y="2"]');
+      const cell1 = <HTMLElement>el.querySelector('.cell[data-x="1"][data-y="2"]');
       cell1.click();
       expect(onCellClick).toHaveBeenCalledWith(1, 2);
       expect(onCellClick).toHaveBeenCalledTimes(1);

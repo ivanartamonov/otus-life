@@ -1,38 +1,34 @@
-/* eslint-disable no-param-reassign */
-
 import { drawField } from "./drawField";
 import { getNextState } from "./getNextState";
 import { isAnyoneAlive } from "./isAnyoneAlive";
 
-/**
- * Создание игры Жизнь
- * @param sizeX {number} - число колонок
- * @param sizeY {number} - число строк
- * @param htmlElement {HTMLElement} - элемент, в котором будет отрисована игра
- * @returns void
- */
-export function createGameOfLife(sizeX, sizeY, htmlElement) {
+export function createGameOfLife(
+  sizeX: number,
+  sizeY: number,
+  htmlElement: HTMLElement
+) {
   let gameIsRunning = false;
-  let timer;
+  let timer: NodeJS.Timeout;
 
   // Создать блок для поля
   // Создать кнопку управления игрой
   htmlElement.innerHTML = `<div class="field-wrapper"></div><button>Start</button>`;
-  const fieldWrapper = htmlElement.querySelector(".field-wrapper");
-  const button = htmlElement.querySelector("button");
+  const fieldWrapper = <HTMLElement>htmlElement.querySelector(".field-wrapper");
+  const button = <HTMLButtonElement>htmlElement.querySelector("button");
 
   // Создать поле заданного размера
-  let field = Array.from({ length: sizeY }).map(() =>
-    Array.from({ length: sizeX }).fill(0)
+  let field: number[][] = Array.from({ length: sizeY }).map(() =>
+    new Array(sizeX).fill(0)
   );
 
-  const cellClickHandler = (x, y) => {
+  const cellClickHandler = (x: number, y: number) => {
     field[y][x] = field[y][x] === 0 ? 1 : 0;
     drawField(fieldWrapper, field, cellClickHandler);
   };
 
   // Отрисовать поле заданного размера
   drawField(fieldWrapper, field, cellClickHandler);
+
   // При клике по ячейке поля
   // - поменять его состояние
   // - перерисовать поле
@@ -42,6 +38,7 @@ export function createGameOfLife(sizeX, sizeY, htmlElement) {
     // При клике на кнопке `Stop` остановить таймер
     clearInterval(timer);
   }
+
   function startGame() {
     // При клике по кнопке старт
     // - поменять надпись на `Stop`

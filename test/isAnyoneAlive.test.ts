@@ -1,4 +1,4 @@
-import { isAnyoneAlive } from "../src/isAnyoneAlive";
+import {isAnyoneAlive} from "../src/isAnyoneAlive";
 
 describe("isAnyoneAlive", () => {
   it("is a function", () => {

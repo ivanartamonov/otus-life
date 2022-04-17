@@ -183,7 +183,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   "transform": {
-    "^.+\\.js$": "babel-jest",
+    "^.+\\.js|\.ts$": "babel-jest",
     ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
   }
 

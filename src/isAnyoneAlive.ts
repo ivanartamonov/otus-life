@@ -1,9 +1,4 @@
-/**
- * проверка что есть живые клетки
- * @param field {number[][]} - состояние поля
- * @return boolean
- */
-export function isAnyoneAlive(field) {
+export function isAnyoneAlive(field: number[][]): boolean {
   for (let i = 0; i < field.length; i += 1) {
     const row = field[i];
     for (let j = 0; j < row.length; j += 1) {
