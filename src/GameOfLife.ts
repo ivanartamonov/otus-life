@@ -15,6 +15,7 @@ class GameOfLife {
   private y: number;
   private gameIsRunning = false;
   private timer: NodeJS.Timer | undefined;
+  private speed = 1000;
   private field!: number[][];
 
   constructor(rootElement: HTMLElement, x: number, y: number) {
@@ -46,6 +47,18 @@ class GameOfLife {
 
     const inputRange = document.createElement("input");
     inputRange.type = "range";
+    inputRange.setAttribute("min", "100");
+    inputRange.setAttribute("max", "10000");
+    inputRange.setAttribute("value", String(this.speed));
+    inputRange.setAttribute("step", "100");
+    inputRange.addEventListener("change", (event) => {
+      const target = event.currentTarget as HTMLInputElement;
+      this.speed = Number(target.value);
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.start();
+      }
+    });
 
     this.fieldWrapper = document.createElement("div");
     this.fieldWrapper.className = "field-wrapper";
@@ -129,7 +142,7 @@ class GameOfLife {
         alert("Death on the block");
         this.stop();
       }
-    }, 1000);
+    }, this.speed);
   }
 
   stop() {
